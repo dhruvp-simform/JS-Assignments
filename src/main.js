@@ -59,4 +59,33 @@ export function specialOperatorsListener() {
 }
 
 export function toggleFunction() {
+    const temp = {
+        'gen': 'hyp',
+        'hyp': 'gen'
+    };
+    const identifier = this.getAttribute('id').substr(0, 3);
+    const status = this.getAttribute('data-status');
+
+    function resetOtherToggle(identifier) {
+        const elem = document.getElementById(`${identifier}ToggleButton`);
+        elem.setAttribute('data-status', 'off');
+        elem.style.backgroundColor = '#EFEFEF';
+        document.querySelectorAll(`.${identifier}-toggle-on`).forEach(elem => { elem.style.display = 'none'; });
+        if (identifier === 'gen') {
+            document.querySelectorAll(`.${identifier}-toggle-off`).forEach(elem => { elem.style.display = 'block'; });
+        }
+    }
+
+    if (Object.keys(temp).includes(identifier)) {
+        resetOtherToggle(temp[identifier]);
+        this.setAttribute('data-status', status === 'on' ? 'off' : 'on');
+        this.style.backgroundColor = status === 'on' ? '#EFEFEF' : 'cornflowerblue';
+        let onSelector = `.${identifier}-toggle-${status === 'on' ? 'off' : 'on'}`;
+        let offSelector = `.${identifier}-toggle-${status}`;
+        if (identifier === 'hyp' && status === 'on')
+            onSelector += `.${temp[identifier]}-toggle-off`;
+
+        document.querySelectorAll(onSelector).forEach(elem => { elem.style.display = 'block'; });
+        document.querySelectorAll(offSelector).forEach(elem => { elem.style.display = 'none'; });
+    }
 }
