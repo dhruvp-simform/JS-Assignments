@@ -1,4 +1,11 @@
-import { valuesListener, operationsListener, operatorsListener, specialOperatorsListener, toggleFunction } from "./src/main.js";
+import {
+    valuesListener,
+    operationsListener,
+    operatorsListener,
+    specialOperatorsListener,
+    toggleFunction,
+    keyPressListener
+} from "./src/main.js";
 
 document.querySelectorAll('.values').forEach(elem => {
     elem.addEventListener('click', valuesListener);
@@ -19,3 +26,5 @@ document.querySelectorAll('.special-operators').forEach(elem => {
 document.querySelectorAll('.toggle-buttons').forEach(elem => {
     elem.addEventListener('click', toggleFunction);
 });
+
+document.querySelector('body').addEventListener('keydown', keyPressListener);

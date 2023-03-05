@@ -1,7 +1,25 @@
 import Eval from './evaluate.js';
 import { useScreen, clearScreen, removeElement, useOperator, showResult } from './hooks.js';
-import { SYMBOL_TABLE } from './constants.js';
+import { KEYS, SYMBOL_TABLE } from './constants.js';
 import { getLastValidUnit, validateInputForNumbers, validateInputForOperators } from './validation.js';
+
+export function keyPressListener(event) {
+    const key = event.key;
+    function fakeThis(val = key) {
+        return {
+            getAttribute() {
+                return val;
+            }
+        };
+    }
+
+    if (/\d|\./.test(key) || key === '(' || key === ')')
+        valuesListener.call(fakeThis());
+    else if (Object.keys(KEYS.operators).includes(key))
+        operatorsListener.call(fakeThis(KEYS.operators[key]));
+    else if (Object.keys(KEYS.operations).includes(key))
+        operationsListener.call(fakeThis(KEYS.operations[key]));
+}
 
 export function valuesListener() {
     const val = this.getAttribute('data-value');

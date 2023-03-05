@@ -41,3 +41,18 @@ export const SYMBOL_TABLE = {
     'ceil': '⎡#⎤',
     'floor': '⎣#⎦'
 };
+
+export const KEYS = {
+    operations: {
+        'Enter': 'eq',
+        'Backspace': 'remove',
+        'Escape': 'clear'
+    },
+    operators: {
+        '+': 'add',
+        '-': 'sub',
+        '/': 'div',
+        '*': 'mul',
+        '^': 'pow'
+    }
+};
