@@ -1,6 +1,83 @@
 import { SYMBOL_TABLE } from './constants.js';
 
+function factorial(number) {
+    if (number === 0) return 1;
+    return number * factorial(number - 1);
+}
+
+function evaluateSpecialOperation(operator, expression) {
+    expression = evaluate(expression);
+
+    switch (operator) {
+        case SYMBOL_TABLE['log']:
+            return Math.log10(expression);
+        case SYMBOL_TABLE['ln']:
+            return Math.log(expression);
+        case SYMBOL_TABLE['sqrt']:
+            return Math.sqrt(expression);
+        case SYMBOL_TABLE['qrt']:
+            return Math.cbrt(expression);
+        case SYMBOL_TABLE['sin']:
+            return Math.sin(expression * Math.PI / 180);
+        case SYMBOL_TABLE['cos']:
+            return Math.cos(expression * Math.PI / 180);
+        case SYMBOL_TABLE['tan']:
+            return Math.tan(expression * Math.PI / 180);
+        case SYMBOL_TABLE['csc']:
+            return 1 / Math.sin(expression * Math.PI / 180);
+        case SYMBOL_TABLE['sec']:
+            return 1 / Math.cos(expression * Math.PI / 180);
+        case SYMBOL_TABLE['cot']:
+            return 1 / Math.tan(expression * Math.PI / 180);
+        case SYMBOL_TABLE['asin']:
+            return Math.asin(expression * Math.PI / 180);
+        case SYMBOL_TABLE['acos']:
+            return Math.acos(expression * Math.PI / 180);
+        case SYMBOL_TABLE['atan']:
+            return Math.atan(expression * Math.PI / 180);
+        case SYMBOL_TABLE['acsc']:
+            return Math.asin(1 / expression * Math.PI / 180);
+        case SYMBOL_TABLE['asec']:
+            return Math.acos(1 / expression * Math.PI / 180);
+        case SYMBOL_TABLE['acot']:
+            return Math.atan(1 / expression * Math.PI / 180);
+        case SYMBOL_TABLE['sinh']:
+            return Math.sinh(expression * Math.PI / 180);
+        case SYMBOL_TABLE['cosh']:
+            return Math.cosh(expression * Math.PI / 180);
+        case SYMBOL_TABLE['tanh']:
+            return Math.tanh(expression * Math.PI / 180);
+        case SYMBOL_TABLE['csch']:
+            return 1 / Math.sinh(expression * Math.PI / 180);
+        case SYMBOL_TABLE['sech']:
+            return 1 / Math.cosh(expression * Math.PI / 180);
+        case SYMBOL_TABLE['coth']:
+            return 1 / Math.tanh(expression * Math.PI / 180);
+        case '|':
+            return Math.abs(expression);
+        case '⎡':
+            return Math.ceil(expression);
+        case '⎣':
+            return Math.floor(expression);
+        case '!':
+            return factorial(expression);
+    }
+}
+
+function evaluateSpecialOperations(expression) {
+    const specialOperatorsEvaluationRegex = /((?<operator1>(\blog\b|\bln\b|\bsin\b|\bcos\b|\btan\b|\bcsc\b|\bsec\b|\bcot\b|\basin\b|\bacos\b|\batan\b|\bacsc\b|\basec\b|\bacot\b|\bsinh\b|\bcosh\b|\btanh\b|\bcsch\b|\bsech\b|\bcoth\b|√|∛)\()(?<expression1>((\(\d+(\.\d+)?\)|\d+(\.\d+)?)(\+|\-|\^|\*|\/)?)+)\))|((?<operator2>(\||\⎡|\⎣))(?<expression2>(\d+(\.\d+)?))(\||\⎤|\⎦))|((?<expression3>\d+)(?<operator3>\!))/;
+    let result;
+
+    while ((result = specialOperatorsEvaluationRegex.exec(expression)) !== null) {
+        const output = evaluateSpecialOperation(result.groups.operator1 ?? result.groups.operator2 ?? result.groups.operator3, result.groups.expression1 ?? result.groups.expression2 ?? result.groups.expression3);
+        expression = expression.substr(0, result.index) + output.toString() + expression.substr(result.index + result[0].length);
+    }
+
+    return expression;
+}
+
 function parseExpression(expression) {
+    expression = evaluateSpecialOperations(expression);
     const parserRegex = /(\d+(\.\d+)?)|\(|\)|(\+|\-|\*|\/|\^)/g;
     const iterator = expression.matchAll(parserRegex);
 
