@@ -29,6 +29,21 @@ export function operationsListener() {
         case 'eq':
             showResult(Eval(document.getElementById('input').value));
             break;
+        case 'mc':
+            memoryClear();
+            break;
+        case 'mr':
+            memoryRead();
+            break;
+        case 'mp':
+            memoryAdd(Eval(document.getElementById('input').value));
+            break;
+        case 'mm':
+            memorySub(Eval(document.getElementById('input').value));
+            break;
+        case 'ms':
+            memoryStore(Eval(document.getElementById('input').value));
+            break;
     }
 }
 
