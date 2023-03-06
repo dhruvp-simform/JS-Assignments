@@ -19,7 +19,7 @@ export function clearScreen() {
 }
 
 export function removeElement() {
-    if (input.value.length === 1) input.value = 0;
+    if (input.value.length === 1) input.value = '0';
     else input.value = input.value.slice(0, -1);
 }
 

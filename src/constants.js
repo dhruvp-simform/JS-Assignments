@@ -39,7 +39,8 @@ export const SYMBOL_TABLE = {
     'sech': 'sech(',
     'coth': 'coth(',
     'ceil': '⎡#⎤',
-    'floor': '⎣#⎦'
+    'floor': '⎣#⎦',
+    'pom': '(-#)'
 };
 
 export const KEYS = {

@@ -5,71 +5,77 @@ function factorial(number) {
     return number * factorial(number - 1);
 }
 
-function evaluateSpecialOperation(operator, expression) {
-    expression = evaluate(expression);
+function evaluateSpecialOperation(operator, expression1, expression2) {
+    expression1 = parseFloat(evaluate(expression1));
+    expression2 = expression2 && parseFloat(expression2);
 
     switch (operator) {
         case SYMBOL_TABLE['log']:
-            return Math.log10(expression);
+            return Math.log10(expression1);
         case SYMBOL_TABLE['ln']:
-            return Math.log(expression);
+            return Math.log(expression1);
         case SYMBOL_TABLE['sqrt']:
-            return Math.sqrt(expression);
+            return Math.sqrt(expression1);
         case SYMBOL_TABLE['qrt']:
-            return Math.cbrt(expression);
+            return Math.cbrt(expression1);
         case SYMBOL_TABLE['sin']:
-            return Math.sin(expression * Math.PI / 180);
+            return Math.sin(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['cos']:
-            return Math.cos(expression * Math.PI / 180);
+            return Math.cos(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['tan']:
-            return Math.tan(expression * Math.PI / 180);
+            return Math.tan(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['csc']:
-            return 1 / Math.sin(expression * Math.PI / 180);
+            return 1 / Math.sin(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['sec']:
-            return 1 / Math.cos(expression * Math.PI / 180);
+            return 1 / Math.cos(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['cot']:
-            return 1 / Math.tan(expression * Math.PI / 180);
+            return 1 / Math.tan(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['asin']:
-            return Math.asin(expression * Math.PI / 180);
+            return Math.asin(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['acos']:
-            return Math.acos(expression * Math.PI / 180);
+            return Math.acos(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['atan']:
-            return Math.atan(expression * Math.PI / 180);
+            return Math.atan(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['acsc']:
-            return Math.asin(1 / expression * Math.PI / 180);
+            return Math.asin(1 / expression1 * Math.PI / 180);
         case SYMBOL_TABLE['asec']:
-            return Math.acos(1 / expression * Math.PI / 180);
+            return Math.acos(1 / expression1 * Math.PI / 180);
         case SYMBOL_TABLE['acot']:
-            return Math.atan(1 / expression * Math.PI / 180);
+            return Math.atan(1 / expression1 * Math.PI / 180);
         case SYMBOL_TABLE['sinh']:
-            return Math.sinh(expression * Math.PI / 180);
+            return Math.sinh(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['cosh']:
-            return Math.cosh(expression * Math.PI / 180);
+            return Math.cosh(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['tanh']:
-            return Math.tanh(expression * Math.PI / 180);
+            return Math.tanh(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['csch']:
-            return 1 / Math.sinh(expression * Math.PI / 180);
+            return 1 / Math.sinh(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['sech']:
-            return 1 / Math.cosh(expression * Math.PI / 180);
+            return 1 / Math.cosh(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['coth']:
-            return 1 / Math.tanh(expression * Math.PI / 180);
+            return 1 / Math.tanh(expression1 * Math.PI / 180);
         case '|':
-            return Math.abs(expression);
+            return Math.abs(expression1);
         case '⎡':
-            return Math.ceil(expression);
+            return Math.ceil(expression1);
         case '⎣':
-            return Math.floor(expression);
+            return Math.floor(expression1);
         case '!':
-            return factorial(expression);
+            return factorial(expression1);
+        case 'mod(':
+            return expression1 % expression2;
     }
 }
 
 function evaluateSpecialOperations(expression) {
-    const specialOperatorsEvaluationRegex = /((?<operator1>(\blog\b|\bln\b|\bsin\b|\bcos\b|\btan\b|\bcsc\b|\bsec\b|\bcot\b|\basin\b|\bacos\b|\batan\b|\bacsc\b|\basec\b|\bacot\b|\bsinh\b|\bcosh\b|\btanh\b|\bcsch\b|\bsech\b|\bcoth\b|√|∛)\()(?<expression1>((\(\d+(\.\d+)?\)|\d+(\.\d+)?)(\+|\-|\^|\*|\/)?)+)\))|((?<operator2>(\||\⎡|\⎣))(?<expression2>(\d+(\.\d+)?))(\||\⎤|\⎦))|((?<expression3>\d+)(?<operator3>\!))/;
+    const specialOperatorsEvaluationRegex = /((?<operator1>(\blog\b|\bln\b|\bsin\b|\bcos\b|\btan\b|\bcsc\b|\bsec\b|\bcot\b|\basin\b|\bacos\b|\batan\b|\bacsc\b|\basec\b|\bacot\b|\bsinh\b|\bcosh\b|\btanh\b|\bcsch\b|\bsech\b|\bcoth\b|√|∛)\()(?<expression1>((\(\d+(\.\d+)?\)|\d+(\.\d+)?|\(\d+(\.\d+)?)(\+|\-|\^|\*|\/)?)+)\))|((?<operator2>(\||\⎡|\⎣))(?<expression2>(\(\-)?(\d+(\.\d+)?)\)?)(\||\⎤|\⎦))|((?<expression3>\d+)(?<operator3>\!))|((\((?<expression4>\d+(\.\d+)?)\)(?<operator4>\bmod\b\()(?<expression5>\d+(\.\d+)?)\)))/;
     let result;
 
     while ((result = specialOperatorsEvaluationRegex.exec(expression)) !== null) {
-        const output = evaluateSpecialOperation(result.groups.operator1 ?? result.groups.operator2 ?? result.groups.operator3, result.groups.expression1 ?? result.groups.expression2 ?? result.groups.expression3);
+        const output = evaluateSpecialOperation(
+            result.groups.operator1 ?? result.groups.operator2 ?? result.groups.operator3 ?? result.groups.operator4,
+            result.groups.expression1 ?? result.groups.expression2 ?? result.groups.expression3 ?? result.groups.expression4,
+            result.groups.expression5);
         expression = expression.substr(0, result.index) + output.toString() + expression.substr(result.index + result[0].length);
     }
 
@@ -106,6 +112,7 @@ function infixToPostfix(expression) {
     const operatorsStack = [];
     let result = [];
     expression = parseExpression(expression);
+    let flag = false;
 
     function operatorsStackPeek() {
         return operatorsStack[operatorsStack.length - 1];
@@ -113,14 +120,18 @@ function infixToPostfix(expression) {
 
     expression.forEach(item => {
         if (isNaN(item)) {
-            if (item === '(')  // Left Parenthesis
+            if (item === '(') {  // Left Parenthesis
+                flag = false;
                 operatorsStack.push(item);
+            }
             else if (item === ')') {   // Right Parenthesis
+                flag = true;
                 while (operatorsStackPeek() !== '(')
                     result.push(operatorsStack.pop());
 
                 operatorsStack.pop();   // To remove '(' from operatorsStack
             } else {     // Operator
+                if (!flag) result.push('0');
                 if (!result.length) result.push('0');
                 if (!operatorsStack.length) operatorsStack.push(item);
                 else {
@@ -129,8 +140,10 @@ function infixToPostfix(expression) {
                     operatorsStack.push(item);
                 }
             }
-        } else
+        } else {
+            flag = true;
             result.push(item);
+        }
     });
 
     while (operatorsStack.length) {
