@@ -16,7 +16,6 @@
         <div>
             <button data-path="home">Home</button>
             <button data-path="add">Add Product</button>
-            <button data-path="edit">Edit Product</button>
         </div>
     </nav>
     <section id="router">
@@ -24,10 +23,13 @@
             <h1>Home Page</h1>
         </div>
         <div class="components" id="add">
-            <h1>Add Product Page</h1>
-        </div>
-        <div class="components" id="edit">
-            <h1>Edit Product Page</h1>
+            <form id="productform">
+                <input type="text" placeholder="Product Title" name="title" required />
+                <input type="text" placeholder="Product Description" name="desc" required />
+                <input type="number" placeholder="0" name="price" required />
+                <input type="file" placeholder="Choose Product Image" name="image" required accept="image/*" />
+                <input type="submit" />
+            </form>
         </div>
     </section>
 </body>

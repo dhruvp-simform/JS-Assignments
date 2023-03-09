@@ -1,7 +1,7 @@
 import { routingListener } from "./src/main.js";
 import { navigate } from "./src/router.js";
 
-navigate();
+navigate('add');
 
 document.querySelectorAll('nav button').forEach(btn => {
     btn.addEventListener('click', routingListener);
