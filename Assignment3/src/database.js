@@ -26,7 +26,7 @@ export function removeProduct(id) {
 
 export function updateProduct(id, product) {
     const data = getData();
-    const index = data.findIndexOf(product => product.id === id);
+    const index = data.findIndex(product => product.id === id);
     data[index] = {
         ...data[index],
         ...product

@@ -1,13 +1,13 @@
 import { pageStates } from './pageState.js';
 
-const components = document.querySelectorAll('.components');
+const pages = document.querySelectorAll('.page');
 let currentPageState = null;
 
-export function navigate(id = 'home') {
+export function navigate(id = 'home', ...args) {
     currentPageState && currentPageState();
-    currentPageState = pageStates[id]();
-    components.forEach(component => {
-        // history.replaceState({}, document.title, `/${id}`);
-        component.style.display = component.getAttribute('id') === id ? 'block' : 'none';
+    currentPageState = pageStates[id](...args);
+    pages.forEach(page => {
+        history.replaceState({}, document.title, `/${id}`);
+        page.style.display = page.getAttribute('id') === id ? 'block' : 'none';
     });
 }

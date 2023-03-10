@@ -62,10 +62,7 @@ export function imageValidation() {
     let flag = false;
     let message = '';
 
-    if (!file) {
-        flag = true;
-        message = 'Product Image is required';
-    } else if (file.size > 200000) {
+    if (file.size > 200000) {
         flag = true;
         message = 'File size must be less than 200KB';
     }
