@@ -1,4 +1,9 @@
 const CRUD_OPERATIONS_DATA = 'crud-operations-data';
+
+export function initLocalStorage() {
+    localStorage.getItem(CRUD_OPERATIONS_DATA) ?? localStorage.setItem(CRUD_OPERATIONS_DATA, '[]');
+}
+
 function getData() {
     return JSON.parse(localStorage.getItem(CRUD_OPERATIONS_DATA));
 }
