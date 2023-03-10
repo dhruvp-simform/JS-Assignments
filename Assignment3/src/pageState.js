@@ -1,7 +1,8 @@
 import { descValidation, imageValidation, priceValidation, titleValidation } from './validation.js';
-import { debounce, getBlob } from './utils.js';
+import { debounce, getBlob, getTableBody } from './utils.js';
 import { addProduct } from './database.js';
 import { navigate } from './router.js';
+import { getAllProducts } from './database.js';
 
 export const pageStates = {
     'home': homeInitState,
@@ -9,7 +10,14 @@ export const pageStates = {
 };
 
 function homeInitState() {
-    console.log('Home Page Init');
+    const ERROR_MESSAGE = document.querySelector('#errorMessage');
+    const PRODUCT_TABLE = document.querySelector('#productsTable');
+    const products = getAllProducts();
+
+    ERROR_MESSAGE.style.display = products?.length ? 'none' : 'block';
+    PRODUCT_TABLE.style.display = products?.length ? 'block' : 'none';
+
+    PRODUCT_TABLE.querySelector('tbody').innerHTML = getTableBody(products);
 
     return () => {
         console.log('Home Page Destroy');

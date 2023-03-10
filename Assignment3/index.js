@@ -3,7 +3,7 @@ import { routingListener } from "./src/main.js";
 import { navigate } from "./src/router.js";
 
 initLocalStorage();
-navigate('add');
+navigate();
 
 document.querySelectorAll('nav button').forEach(btn => {
     btn.addEventListener('click', routingListener);

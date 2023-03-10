@@ -18,3 +18,21 @@ export async function getBlob(file) {
         reader.readAsDataURL(file);
     });
 }
+
+export function getTableBody(products) {
+    let tbody = '';
+    products.forEach(product => {
+        tbody += `
+        <tr>
+            <td>${product.id}</td>
+            <td>${product.title}</td>
+            <td>${product.desc}</td>
+            <td><img src="${product.image}" width="100" alt="${product.title}"/></td>
+            <td><button class="editButton" data-id="${product.id}">Edit</button></td>
+            <td><button class="deleteButton" data-id="${product.id}">Remove</button></td>
+        </tr>
+        `;
+    });
+
+    return tbody;
+}
