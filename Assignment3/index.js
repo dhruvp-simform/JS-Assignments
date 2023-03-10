@@ -5,6 +5,6 @@ import { navigate } from "./src/router.js";
 initLocalStorage();
 navigate();
 
-document.querySelectorAll('nav button').forEach(btn => {
+document.querySelectorAll('nav li button').forEach(btn => {
     btn.addEventListener('click', routingListener);
 });
