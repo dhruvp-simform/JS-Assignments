@@ -12,6 +12,17 @@ function saveData(data) {
     localStorage.setItem(CRUD_OPERATIONS_DATA, JSON.stringify(data));
 }
 
+export function searchProductsByPattern(pattern) {
+    const data = getData();
+    if (!pattern) return data;
+    return data.filter(product => {
+        return (
+            product.title.toLowerCase().includes(pattern.toLowerCase()) ||
+            product.desc.toLowerCase().includes(pattern.toLowerCase())
+        );
+    });
+}
+
 export function addProduct(product) {
     const data = getData();
     data.push(product);

@@ -39,11 +39,34 @@
 
     <section id="router">
         <div class="container page" id="home">
-            <h1 class="text-center">Products</h1>
-            <p class="text-center" id="errorMessage">No Products!</p>
+            <h1 class="text-center mt-5">Products</h1>
+            <div class="d-flex justify-content-between my-5">
+                <input id="searchbar" class="form-control w-50 mb-3" type="search" placeholder="Search"
+                    aria-label="Search" />
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Sort by
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><button class="dropdown-item active" data-sort="none">None</button></li>
+                        <li><button class="dropdown-item" data-sort="id" data-order="asc">Id (asc)</button></li>
+                        <li><button class="dropdown-item" data-sort="title" data-order="asc">Title (asc)</button></li>
+                        <li><button class="dropdown-item" data-sort="desc" data-order="asc">Description (asc)</button>
+                        </li>
+                        <li><button class="dropdown-item" data-sort="price" data-order="asc">Price (asc)</button></li>
+                        <li><button class="dropdown-item" data-sort="id" data-order="desc">Id (desc)</button></li>
+                        <li><button class="dropdown-item" data-sort="title" data-order="desc">Title (desc)</button></li>
+                        <li><button class="dropdown-item" data-sort="desc" data-order="desc">Description (desc)</button>
+                        </li>
+                        <li><button class="dropdown-item" data-sort="price" data-order="desc">Price (desc)</button></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center" id="errorMessage"></p>
             <div class="row table-responsive">
                 <table class="table table-bordered" id="productsTable">
-                    <thead>
+                    <thead class="text-center">
                         <th>Id</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -52,7 +75,7 @@
                         <th></th>
                         <th></th>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="text-center"></tbody>
                 </table>
             </div>
         </div>
@@ -62,18 +85,18 @@
         <div class="container w-50 mx-auto page" id="edit">
             <h1>Edit Product</h1>
         </div>
-        <div id="components">
-            <form id="productform" class="form">
-                <input class="form-control mb-3" type="text" placeholder="Product Title" name="title" required />
-                <input class="form-control mb-3" type="text" placeholder="Product Description" name="desc" required />
-                <input class="form-control mb-3" type="number" placeholder="0" name="price" required />
-                <input class="form-control mb-3" type="file" placeholder="Choose Product Image" name="image" required
-                    accept="image/*" />
-                <img class="image form-control mb-3" name="imagePreview" src="" alt="" />
-                <input class="btn btn-success mb-3" type="submit" name="submit" />
-            </form>
-        </div>
     </section>
+    <div id="components">
+        <form id="productform" class="form">
+            <input class="form-control mb-3" type="text" placeholder="Product Title" name="title" required />
+            <input class="form-control mb-3" type="text" placeholder="Product Description" name="desc" required />
+            <input class="form-control mb-3" type="number" placeholder="0" name="price" required />
+            <input class="form-control mb-3" type="file" placeholder="Choose Product Image" name="image"
+                accept="image/*" />
+            <img class="image form-control mb-3" name="imagePreview" src="" alt="" />
+            <input class="btn btn-success mb-3" type="submit" name="submit" />
+        </form>
+    </div>
 </body>
 
 </html>
