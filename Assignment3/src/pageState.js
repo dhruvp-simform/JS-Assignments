@@ -8,6 +8,8 @@ export const pageStates = {
     'edit': editProductInitState
 };
 
+// Each PageState function will return a Destroyer function to disable EventListeners on that page
+// Initial State for "Home Page"
 function homeInitState() {
     const SEARCHBAR = document.querySelector('#searchbar');
     const DROPDOWN_ITEMS = document.querySelectorAll('.dropdown .dropdown-menu .dropdown-item');
@@ -16,6 +18,7 @@ function homeInitState() {
     let destroyErrorMessage = !products?.length && renderErrorMessage();
     let destroyProductsTable = products?.length && renderProductsTable(products);
 
+    // Sorting Function
     function sortProducts() {
         DROPDOWN_ITEMS.forEach(elem => elem.classList.remove('active'));
         this.classList.add('active');
@@ -47,6 +50,8 @@ function homeInitState() {
         destroyProductsTable = renderProductsTable(products);
     }
 
+
+    // Searching Function - Debounce
     const debounceSearch = debounce(function () {
         products = searchProductsByPattern(this.value);
         if (!products?.length) {
@@ -75,6 +80,7 @@ function homeInitState() {
     };
 }
 
+// Initial State for "Add Product Page"
 function addProductInitState() {
     const [productForm, destroyProductForm] = renderProductForm();
     document.querySelector('.page#add').appendChild(productForm);
@@ -82,6 +88,7 @@ function addProductInitState() {
     return destroyProductForm;
 }
 
+// Initial State for "Edit Product Page"
 function editProductInitState(id) {
     const product = getProductById(id);
     const [productForm, destroyProductForm] = renderProductForm(product);

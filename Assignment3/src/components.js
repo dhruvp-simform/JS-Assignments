@@ -3,6 +3,16 @@ import { updateProduct, addProduct, removeProduct } from './database.js';
 import { debounce, getTableBody, getBlob } from './utils.js';
 import { titleValidation, descValidation, priceValidation, imageValidation } from './validation.js';
 
+
+/*
+Reusable Component for Product Form
+- The function renders Product Form
+- It sets Necessary Event Listeners for Product Form Input validation and Submission
+- It returns a Destroyer Function, which will 
+    - Remove all Event Listeners added in Product form
+    - Disable Product form
+  when called.
+*/
 export function renderProductForm(product = null) {
     const PRODUCT_FORM = document.querySelector('#components #productform');
     const TITLE_INPUT = PRODUCT_FORM.elements.title;
@@ -73,6 +83,14 @@ export function renderProductForm(product = null) {
     }];
 }
 
+/*
+Reusable component for Products Table
+- The function renders Products table
+- It sets Necessary Event Listeners for Products Table
+- It returns a Destroyer Function, which will 
+    - Remove all Event Listeners added in Products Table
+  when called.
+*/
 export function renderProductsTable(products) {
     const PRODUCTS_TABLE_BODY = document.querySelector('#productsTable tbody');
     PRODUCTS_TABLE_BODY.innerHTML = getTableBody(products);
@@ -98,6 +116,16 @@ export function renderProductsTable(products) {
     };
 }
 
+/*
+Reusable component for Error Message
+- The function 
+    - renders Error Message 
+    - Disables Products Table
+- It returns a Destroyer Function, which will 
+    - Disable Error Message
+    - Render Products Table
+  when called.
+*/
 export function renderErrorMessage(message = null) {
     const ERROR_MESSAGE = document.querySelector('#errorMessage');
     const PRODUCTS_TABLE = document.querySelector('#productsTable');

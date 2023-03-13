@@ -1,3 +1,4 @@
+// Product Form 'title' field Validation
 export function titleValidation() {
     const value = this.value;
     let flag = false;
@@ -17,6 +18,7 @@ export function titleValidation() {
     this.reportValidity();
 }
 
+// Product Form 'desc' field Validation
 export function descValidation() {
     const value = this.value;
     let flag = false;
@@ -37,6 +39,7 @@ export function descValidation() {
     this.reportValidity();
 }
 
+// Product Form 'price' field Validation
 export function priceValidation() {
     const value = this.value;
     let flag = false;
@@ -57,6 +60,7 @@ export function priceValidation() {
     this.reportValidity();
 }
 
+// Product Form 'image' field Validation
 export function imageValidation() {
     const file = this.files[0];
     let flag = false;

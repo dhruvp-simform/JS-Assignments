@@ -1,5 +1,6 @@
 const DEFAULT_VALIDATION_DELAY = 1000;
 
+// Debounce Generator | DebounceFactory
 export function debounce(validationFunction, delay = DEFAULT_VALIDATION_DELAY) {
     let timer;
 
@@ -9,6 +10,7 @@ export function debounce(validationFunction, delay = DEFAULT_VALIDATION_DELAY) {
     };
 }
 
+// Convert Image to Blob
 export async function getBlob(file) {
     return new Promise(resolve => {
         const reader = new FileReader();
@@ -19,6 +21,7 @@ export async function getBlob(file) {
     });
 }
 
+// Create Table body from stored data in LocalStorage
 export function getTableBody(products) {
     let tbody = '';
     products.forEach(product => {

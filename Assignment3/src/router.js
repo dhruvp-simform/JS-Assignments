@@ -3,6 +3,7 @@ import { pageStates } from './pageState.js';
 const pages = document.querySelectorAll('.page');
 let currentPageState = null;
 
+// Actual Router that enables Client Side Routing
 export function navigate(id = 'home', ...args) {
     currentPageState && currentPageState();
     currentPageState = pageStates[id](...args);
