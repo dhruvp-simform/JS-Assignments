@@ -1,0 +1,355 @@
+/* Global Styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+button {
+    box-sizing: content-box;
+    padding: 7px 30px;
+    text-align: center;
+    height: 60%;
+    font-size: 1rem;
+    font-weight: bolder;
+    border: none;
+    box-shadow: 3px 3px 0.2px;
+}
+
+button:active {
+    box-shadow: none;
+    position: relative;
+    top: 3px;
+    left: 3px;
+}
+
+a:not(h1 a):hover {
+    font-size: 1.4rem;
+    border-bottom: 1px dotted white;
+}
+
+a:hover,
+button:hover,
+.link {
+    cursor: pointer;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    background-color: black;
+    color: white;
+    z-index: 1000;
+}
+
+nav h1 a {
+    font-size: 2rem;
+}
+
+nav .container div {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    font-size: 1.2rem;
+}
+
+section {
+    scroll-margin-top: 10vh;
+    height: 95vh;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px dotted lightgray;
+    background-repeat: no-repeat;
+    background-blend-mode: color-dodge;
+    background-position: center;
+}
+
+section .container img {
+    width: 30%;
+    display: block;
+    box-shadow: 10px 20px 40px 0.1px;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vh;
+    font-size: 1.3rem;
+    max-width: 50%;
+}
+
+.content div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5%;
+}
+
+.content div p {
+    font-size: 80%;
+}
+
+#home {
+    background-image: url(images/image1.jpg);
+
+}
+
+#about {
+    background-image: url(images/image9.jpg);
+}
+
+#images {
+    background-image: url(images/image8.jpg);
+}
+
+#subscribe {
+    background-image: url(images/image9.jpg);
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0%);
+    }
+
+    25% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(-200%);
+    }
+
+    75% {
+        transform: translateX(-300%);
+    }
+
+    100% {
+        transform: translateX(-400%);
+    }
+}
+
+#slider {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    box-shadow: 10px 20px 40px 0.1px;
+}
+
+#slider img {
+    width: 100%;
+    animation: slide 50s backwards infinite;
+    animation-direction: alternate;
+    animation-delay: 3s;
+    animation-timing-function: ease-in-out;
+    box-shadow: none;
+}
+
+#subscribe .container {
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 5%;
+}
+
+#subscribe div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2%;
+}
+
+#subscribe input {
+    font-size: 1rem;
+    padding: 0 10px;
+    height: 100%;
+    width: 40%;
+}
+
+@media (max-width:1200px) {
+    * {
+        font-size: 18px;
+    }
+
+    section .container {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        row-gap: 6%;
+    }
+
+    section:nth-of-type(odd) .container {
+        flex-direction: column-reverse;
+    }
+
+    nav a {
+        font-size: 1.5rem;
+    }
+
+    section .container:not(#images .container) img {
+        min-width: 60%;
+        max-width: 90%;
+        max-height: 80%;
+    }
+
+    button {
+        height: 60%;
+        padding: 7px 15px;
+        font-size: 0.8rem;
+    }
+
+    .content {
+        width: 100%;
+        height: 20%;
+        justify-content: center;
+        row-gap: 10%;
+        text-align: center;
+    }
+
+    .content div {
+        width: 100%;
+        align-self: center;
+        justify-content: center;
+    }
+
+    #slider {
+        min-width: 60%;
+        max-width: 90%;
+        max-height: 80%;
+    }
+
+    #images .container {
+        row-gap: 5%;
+    }
+
+    #subscribe .container {
+        row-gap: 3%;
+    }
+
+    #subscribe div {
+        height: 15%;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 10%;
+        width: 80%;
+    }
+
+    #subscribe input,
+    #subscribe button {
+        width: 100%;
+        height: 30%;
+    }
+
+    #subscribe button {
+        padding: 0;
+    }
+}
+
+@media (max-width:900px) {
+
+    * {
+        font-size: 16px;
+    }
+
+    nav a:not(h1 a) {
+        font-size: 1.3rem;
+    }
+
+    section .container {
+        width: 100%;
+    }
+
+    section .container:not(#images .container) img {
+        min-width: 60%;
+        max-width: 90%;
+        max-height: 80%;
+    }
+
+    #slider {
+        max-width: 90%;
+        min-width: 60%;
+        max-height: 80%;
+    }
+
+    #subscribe div {
+        width: 85%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    * {
+        font-size: 14px;
+    }
+
+    nav .container {
+        flex-direction: column;
+        row-gap: 10px;
+        justify-content: center;
+    }
+
+    nav a:not(h1 a) {
+        font-size: 0.9rem;
+    }
+
+    nav a:not(h1 a):hover {
+        font-size: 1.1rem;
+    }
+
+    section .container {
+        width: 100%;
+        row-gap: 4%;
+    }
+
+    section .container:not(#images .container) img {
+        min-width: 60%;
+        width: 80%;
+        max-width: 80%;
+        max-height: 70%;
+    }
+
+    #slider {
+        min-width: 60%;
+        max-width: 80%;
+        width: 80%;
+        max-height: 70%;
+    }
+
+    #subscribe div {
+        width: 85%;
+    }
+
+    .content {
+        font-size: 0.8rem;
+    }
+}
