@@ -1,10 +1,12 @@
 import { SYMBOL_TABLE } from './constants.js';
 
+// Factorial Function - Recursive
 function factorial(number) {
     if (number === 0) return 1;
     return number * factorial(number - 1);
 }
 
+// Special Operators Evaluation Function
 function evaluateSpecialOperation(operator, expression1, expression2) {
     expression1 = parseFloat(evaluate(expression1));
     expression2 = expression2 && parseFloat(expression2);
@@ -67,7 +69,13 @@ function evaluateSpecialOperation(operator, expression1, expression2) {
     }
 }
 
+// Special Operations Evaluation Function
 function evaluateSpecialOperations(expression) {
+    /*
+    Regular Expression to
+    - Parse Special Operators in Expression
+    - Parse sub-legal-expressions inside those Special operators
+    */
     const specialOperatorsEvaluationRegex = /((?<operator1>(\blog\b|\bln\b|\bsin\b|\bcos\b|\btan\b|\bcsc\b|\bsec\b|\bcot\b|\basin\b|\bacos\b|\batan\b|\bacsc\b|\basec\b|\bacot\b|\bsinh\b|\bcosh\b|\btanh\b|\bcsch\b|\bsech\b|\bcoth\b|√|∛)\()(?<expression1>((\(\d+(\.\d+)?\)|\d+(\.\d+)?|\(\d+(\.\d+)?)(\+|\-|\^|\*|\/)?)+)\))|((?<operator2>(\||\⎡|\⎣))(?<expression2>(\(\-)?(\d+(\.\d+)?)\)?)(\||\⎤|\⎦))|((?<expression3>\d+)(?<operator3>\!))|((\((?<expression4>\d+(\.\d+)?)\)(?<operator4>\bmod\b\()(?<expression5>\d+(\.\d+)?)\)))/;
     let result;
 
@@ -82,8 +90,11 @@ function evaluateSpecialOperations(expression) {
     return expression;
 }
 
+// Parse Tokens from the Expression
 function parseExpression(expression) {
     expression = evaluateSpecialOperations(expression);
+
+    // Regular Expression to parse valid Tokens from expression
     const parserRegex = /(\d+(\.\d+)?)|\(|\)|(\+|\-|\*|\/|\^)/g;
     const iterator = expression.matchAll(parserRegex);
 
@@ -93,6 +104,7 @@ function parseExpression(expression) {
     return parsedExpression;
 }
 
+// Function to get Precendence of an Operator (Not Special Operators)
 function getPrecedence(operator) {
     switch (operator) {
         case SYMBOL_TABLE['add']:
@@ -108,6 +120,7 @@ function getPrecedence(operator) {
     }
 }
 
+// Infix to Postfix Expression conversion
 function infixToPostfix(expression) {
     const operatorsStack = [];
     let result = [];
@@ -156,6 +169,7 @@ function infixToPostfix(expression) {
 function postfixEvaluation(expression) {
     const numbersStack = [];
 
+    // Evaluate function for Postfix Expression evaluation
     function evaluate(operator) {
         let result = 0;
         const n2 = parseFloat(numbersStack.pop());
@@ -198,6 +212,7 @@ function postfixEvaluation(expression) {
     return numbersStack[0];
 }
 
+// Custom Eval function Which will generate output for any Valid Expression possible for this Calculator
 export default function evaluate(expression) {
     const postfixExpression = infixToPostfix(expression);
     const result = postfixEvaluation(postfixExpression);

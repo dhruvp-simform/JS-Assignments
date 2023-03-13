@@ -3,6 +3,7 @@ import { useScreen, clearScreen, removeElement, useOperator, showResult } from '
 import { KEYS, SYMBOL_TABLE } from './constants.js';
 import { getLastValidUnit, validateInputForNumbers, validateInputForOperators } from './validation.js';
 
+// Keypress EventListener
 export function keyPressListener(event) {
     const key = event.key;
     function fakeThis(val = key) {
@@ -21,6 +22,7 @@ export function keyPressListener(event) {
         operationsListener.call(fakeThis(KEYS.operations[key]));
 }
 
+// type-Values EventListener
 export function valuesListener() {
     const val = this.getAttribute('data-value');
     const input = document.getElementById('input').value;
@@ -35,6 +37,7 @@ export function valuesListener() {
             useScreen(val);
 }
 
+// type-Operations EventListener
 export function operationsListener() {
     const symbol = this.getAttribute('data-symbol');
     switch (symbol) {
@@ -65,6 +68,7 @@ export function operationsListener() {
     }
 }
 
+// type-Operators EventListener
 export function operatorsListener() {
     const symbol = this.getAttribute('data-symbol');
     const input = document.getElementById('input').value;
@@ -74,6 +78,7 @@ export function operatorsListener() {
     }
 }
 
+// type-SpecialOperators EventListener
 export function specialOperatorsListener() {
     const input = document.getElementById('input').value;
     const symbol = this.getAttribute('data-symbol');
@@ -91,6 +96,7 @@ export function specialOperatorsListener() {
     }
 }
 
+// Toggle EventListener
 export function toggleFunction() {
     const temp = {
         'gen': 'hyp',

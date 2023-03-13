@@ -1,3 +1,4 @@
+// Symbol Table to manage symbols for Buttons Events
 export const SYMBOL_TABLE = {
     'pow': '^',
     'add': '+',
@@ -43,6 +44,7 @@ export const SYMBOL_TABLE = {
     'pom': '(-#)'
 };
 
+// Keybindings with Symbol Table for Keypress Events
 export const KEYS = {
     operations: {
         'Enter': 'eq',
