@@ -35,15 +35,15 @@ function evaluateSpecialOperation(operator, expression1, expression2) {
         case SYMBOL_TABLE['asin']:
             return Math.asin(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['acos']:
-            return Math.acos(expression1 * Math.PI / 180);
+            return Math.acos(expression1);
         case SYMBOL_TABLE['atan']:
-            return Math.atan(expression1 * Math.PI / 180);
+            return Math.atan(expression1);
         case SYMBOL_TABLE['acsc']:
-            return Math.asin(1 / expression1 * Math.PI / 180);
+            return Math.asin(1 / expression1);
         case SYMBOL_TABLE['asec']:
-            return Math.acos(1 / expression1 * Math.PI / 180);
+            return Math.acos(1 / expression1);
         case SYMBOL_TABLE['acot']:
-            return Math.atan(1 / expression1 * Math.PI / 180);
+            return Math.atan(1 / expression1);
         case SYMBOL_TABLE['sinh']:
             return Math.sinh(expression1 * Math.PI / 180);
         case SYMBOL_TABLE['cosh']:
